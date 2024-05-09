@@ -60,17 +60,49 @@ include '../template/header.php';
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            <?php
+                            $attendance_sql = "SELECT * FROM `tbl_attendance` 
+                                RIGHT JOIN tbl_employee_account ON tbl_employee_account.employee_id = tbl_attendance.employee_id
+                                INNER JOIN tbl_worktime_status ON tbl_worktime_status.worktime_status_id = tbl_attendance.worktime_status_id
+                                INNER JOIN tbl_attendance_status ON tbl_attendance_status.attendance_status_id = tbl_attendance.attendance_status_id";
+                            $attendance_result = $conn->query($attendance_sql);
+                            $count = 0;
+                            while ($attendance_row = $attendance_result->fetch_assoc()) {
+
+                                $count += 1;
+                                $date = strtotime($attendance_row['date']);
+                                $formattedDate = date("F j, Y", $date);
+
+                                $timeIn = strtotime($attendance_row['time_in']);
+                                $formattedTimeIn = date("g:i:s A", $timeIn);
+
+                                if ($attendance_row['time_out'] != null) {
+                                    $timeOut = strtotime($attendance_row['time_out']);
+                                    $formattedTimeOut = date("g:i:s A", $timeOut);
+                                } else {
+                                    $formattedTimeOut = null;
+                                }
+
+
+                                ?>
+                                <tr>
+                                    <td><?= $count ?></td>
+                                    <td><?= $attendance_row['username'] ?></td>
+                                    <td><?= $formattedDate ?></td>
+                                    <td><?= $formattedTimeIn ?></td>
+                                    <td><?= ($formattedTimeOut != null) ? $formattedTimeOut : 'PENDING' ?></td>
+                                    <td><?= $attendance_row['attendance_status'] ?></td>
+                                    <td>9 AM</td>
+                                    <td><?= $attendance_row['worktime_status'] ?></td>
+                                    <td>
+                                        <form action="../forms/edit-forms/attendance.php" method="post" class="me-2">
+                                            <input type="hidden" name="id" value="<?= $attendance_row['attendance_id'] ?>">
+                                            <button type="submit" class="btn btn-info"><i class="fa fa-pencil"
+                                                    aria-hidden="true"></i> Edit</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
 

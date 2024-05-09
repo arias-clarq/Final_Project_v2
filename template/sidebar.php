@@ -3,14 +3,14 @@
 
   <!-- logo start -->
   <div class="logo">
-    <h1><a href="index.html">Collective</a></h1>
+    <h1><a href="index.html">Final Project</a></h1>
   </div>
 
   <!-- if logo is image enable this -->
   <!-- image logo -->
   <div class="logo">
     <a href="index.html">
-      <img src="image-path" alt="Your logo" title="Your logo" class="img-fluid" style="height:35px;" />
+      <img src="../assets/images/egg.jpg" alt="Your logo" title="Your logo" class="img-fluid" style="height:50px;" />
     </a>
   </div>
   <!-- //image logo -->
@@ -41,7 +41,15 @@
         <?php
       }
       ?>
-      <li><a href="blocks.html"><i class="fa-solid fa-boxes-stacked"></i><span>Inventory</span></a></li>
+      <li class="menu-list">
+        <a href="#"><i class="fa-solid fa-boxes-stacked"></i>
+          <span>Inventory Management <i class="lnr lnr-chevron-right"></i></span></a>
+        <ul class="sub-menu-list">
+          <li><a href="product.php">Product List</a> </li>
+          <li><a href="category.php">Category List</a> </li>
+          <li><a href="supplier.php">Supplier List</a> </li>
+        </ul>
+      </li>
       <li><a href="forms.html"><i class="fa fa-file-text"></i> <span>Forms</span></a></li>
     </ul>
     <!-- //sidebar nav end -->

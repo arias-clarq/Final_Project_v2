@@ -13,6 +13,17 @@
         <div class="welcome-msg pt-3 pb-4">
             <h1>Hi <span class="text-primary text-capitalize"><?= $user_row['firstname'] ?></span>, Welcome back</h1>
         </div>
+        <?php
+        $id = $_SESSION['login_id'];
+        $currentDate = date("Y-m-d");
+        $time_sql = "SELECT * FROM `tbl_attendance` WHERE `employee_id` = '$id' AND `date` = '$currentDate' AND `time_out` is not null";
+        $time_result = $conn->query($time_sql);
+        if ($time_result->num_rows > 0) {
+            $_SESSION['deleteMsg'] = "You already time out for today";
+            $_SESSION['isTimein'] = true;
+            $_SESSION['isTimeOut'] = true;
+        }
+        ?>
 
         <!-- action msg here -->
         <?php
@@ -40,14 +51,16 @@
             <div class="row row-col-4 justify-content-center">
                 <div class="col-2">
                     <form action="../config/employee/attendance.php" method="post">
-                        <button name="btn_timein" type="submit" class="btn btn-success btn-lg btn-block">Time
+                        <button name="btn_timein" type="submit" class="btn btn-success btn-lg btn-block"
+                            <?= (isset($_SESSION['isTimein']) == true) ? 'disabled' : '' ?>>Time
                             In</button>
                     </form>
                 </div>
 
                 <div class="col-2">
                     <form action="../config/employee/attendance.php" method="post">
-                        <button name="btn_timeout" type="submit" class="btn btn-danger btn-lg btn-block">Time
+                        <button name="btn_timeout" type="submit" class="btn btn-danger btn-lg btn-block"
+                            <?= (isset($_SESSION['isTimeOut']) == true) ? 'disabled' : '' ?>>Time
                             Out</button>
                     </form>
                 </div>
@@ -70,18 +83,40 @@
                     </thead>
                     <tbody>
                         <?php
-                            // $attendanc_sql = "";
-                            // $attendanc_result = $conn->query($attendanc_sql);
-                        ?>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        $attendance_sql = "SELECT * FROM `tbl_attendance` 
+                        RIGHT JOIN tbl_employee_account ON tbl_employee_account.employee_id = tbl_attendance.employee_id
+                        INNER JOIN tbl_worktime_status ON tbl_worktime_status.worktime_status_id = tbl_attendance.worktime_status_id
+                        INNER JOIN tbl_attendance_status ON tbl_attendance_status.attendance_status_id = tbl_attendance.attendance_status_id
+                        WHERE `tbl_attendance`.`employee_id` = $id;";
+                        $attendance_result = $conn->query($attendance_sql);
+                        $count = 0;
+                        while ($attendance_row = $attendance_result->fetch_assoc()) {
+                            $count += 1;
+                            $date = strtotime($attendance_row['date']);
+                            $formattedDate = date("F j, Y", $date);
+
+                            $timeIn = strtotime($attendance_row['time_in']);
+                            $formattedTimeIn = date("g:i:s A", $timeIn);
+
+                            if ($attendance_row['time_out'] != null) {
+                                $timeOut = strtotime($attendance_row['time_out']);
+                                $formattedTimeOut = date("g:i:s A", $timeOut);
+                            } else {
+                                $formattedTimeOut = null;
+                            }
+
+
+                            ?>
+                            <tr>
+                                <td><?= $count ?></td>
+                                <td><?= $attendance_row['username'] ?></td>
+                                <td><?= $formattedDate ?></td>
+                                <td><?= $formattedTimeIn ?></td>
+                                <td><?= ($formattedTimeOut != null) ? $formattedTimeOut : 'PENDING' ?></td>
+                                <td><?= $attendance_row['attendance_status'] ?></td>
+                                <td><?= $attendance_row['worktime_status'] ?></td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>

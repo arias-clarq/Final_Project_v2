@@ -50,6 +50,7 @@
             <li><a href="../../dashboard/customer_mgt.php">Customer</a> </li>
           </ul>
         </li>
+        <li><a href="../../dashboard/attendance_monitoring.php"><i class="fa fa-table"></i> <span>Attendance Monitoring</span></a></li>
         <?php
       }
       ?>

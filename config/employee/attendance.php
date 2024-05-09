@@ -41,3 +41,48 @@ if (isset($_POST['btn_timein'])) {
         header('location: ../../dashboard/dashboard.php');
     }
 }
+
+if (isset($_POST['btn_timeout'])) {
+
+    if (!$_SESSION['isTimein']) {
+        $_SESSION['deleteMsg'] = "Time In First";
+        header('location: ../../dashboard/dashboard.php');
+    } else {
+        $attendanceID = $_SESSION['attendanceID'];
+
+        $sql = "UPDATE `tbl_attendance` SET `time_out`='$currentDateTime' WHERE `attendance_id` = $attendanceID";
+        $result = $conn->query($sql);
+
+        $sql = "SELECT `time_out` FROM `tbl_attendance` WHERE `employee_id` = $id AND `date` = '$currentDate'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $timeout = strtotime($row['time_out']);
+
+            // Calculate the work duration
+            $workDuration = strtotime($currentTime) - $timeout;
+
+            // Check if it's normal work time, overtime, or undertime
+            if ($workDuration >= ($jobEndTime - $jobStartTime)) {
+                $worktime_statusID = 2; // Overtime
+            } elseif ($workDuration < ($jobEndTime - $jobStartTime)) {
+                $worktime_statusID = 3; // Undertime
+            } else {
+                $worktime_statusID = 1; // Normal work time
+            }
+
+            $sql = "UPDATE `tbl_attendance` SET `worktime_status_id`= $worktime_statusID WHERE `employee_id` = $id AND `date` = '$currentDate'";
+            $result = $conn->query($sql);
+        }
+
+        if ($result) {
+            $_SESSION['confirm_msg'] = "Time Out successfully";
+            $_SESSION['isTimeOut'] = true;
+            header('location: ../../dashboard/dashboard.php');
+        } else {
+            $_SESSION['deleteMsg'] = "Time In First";
+            header('location: ../../dashboard/dashboard.php');
+        }
+    }
+}

@@ -81,7 +81,8 @@ include '../template/header.php';
                                 <tr>
                                     <td><?= $count ?></td>
                                     <td>
-                                        <div class="row"><img src="../assets/images/<?= $row['image'] ?>" width="100" height="100"></div>
+                                        <div class="row"><img src="../assets/images/<?= $row['image'] ?>" width="100"
+                                                height="100"></div>
                                         <div class="row"><?= $row['product_name'] ?></div>
                                     </td>
                                     <td><?= $row['description'] ?></td>
@@ -197,11 +198,19 @@ include '../template/header.php';
                                             </div>
                                         </div>
 
-                                        <!-- delete trigger modal -->
-                                        <button type="button" class="btn btn-danger btn-style mb-3" data-toggle="modal"
-                                            data-target="#delete-prod<?= $row['product_id'] ?>">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </button>
+                                        <?php
+                                        if ($_SESSION['login_role'] == 1) {
+                                            ?>
+
+                                            <!-- delete trigger modal -->
+                                            <button type="button" class="btn btn-danger btn-style mb-3" data-toggle="modal"
+                                                data-target="#delete-prod<?= $row['product_id'] ?>">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+
+                                            <?php
+                                        }
+                                        ?>
 
                                         <!-- Delete Modal -->
                                         <div class="modal fade" id="delete-prod<?= $row['product_id'] ?>" tabindex="-1"

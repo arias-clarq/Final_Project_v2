@@ -113,13 +113,18 @@ include '../template/header.php';
 
                                             </div>
                                         </div>
-
-                                        <!-- delete trigger modal -->
-                                        <button type="button" class="btn btn-danger btn-style mb-3" data-toggle="modal"
-                                            data-target="#delete-cat<?= $row['category_id'] ?>">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </button>
-
+                                        
+                                        <?php
+                                        if ($_SESSION['login_role'] == 1) {
+                                            ?>
+                                            <!-- delete trigger modal -->
+                                            <button type="button" class="btn btn-danger btn-style mb-3" data-toggle="modal"
+                                                data-target="#delete-cat<?= $row['category_id'] ?>">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+                                            <?php
+                                        }
+                                        ?>
                                         <!-- Delete Modal -->
                                         <div class="modal fade" id="delete-cat<?= $row['category_id'] ?>" tabindex="-1"
                                             role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

@@ -43,15 +43,25 @@
                         <div class="col-sm-6 pr-sm-2 statistics-grid">
                             <div class="card card_border border-primary-top p-4">
                                 <i class="lnr lnr-users"> </i>
-                                <h3 class="text-primary number">29.75 M</h3>
-                                <p class="stat-text">Total Users</p>
+                                <?php
+                                $supplier_sql = "SELECT COUNT(*) as supplier FROM `tbl_supplier`";
+                                $supplier_res = $conn->query($supplier_sql);
+                                $supplier_row = $supplier_res->fetch_assoc();
+                                ?>
+                                <h3 class="text-primary number"><?= $supplier_row['supplier'] ?></h3>
+                                <p class="stat-text">Total Suppliers</p>
                             </div>
                         </div>
                         <div class="col-sm-6 pl-sm-2 statistics-grid">
                             <div class="card card_border border-primary-top p-4">
-                                <i class="lnr lnr-eye"> </i>
-                                <h3 class="text-secondary number">51.25 K</h3>
-                                <p class="stat-text">Daily Visitors</p>
+                                <i class="lnr lnr-users"> </i>
+                                <?php
+                                $employee_sql = "SELECT COUNT(*) as employee FROM `tbl_employee_account`";
+                                $employee_res = $conn->query($employee_sql);
+                                $employee_row = $employee_res->fetch_assoc();
+                                ?>
+                                <h3 class="text-primary number"><?= $employee_row['employee'] ?></h3>
+                                <p class="stat-text">Total Employee</p>
                             </div>
                         </div>
                     </div>
@@ -60,16 +70,21 @@
                     <div class="row">
                         <div class="col-sm-6 pr-sm-2 statistics-grid">
                             <div class="card card_border border-primary-top p-4">
-                                <i class="lnr lnr-cloud-download"> </i>
-                                <h3 class="text-success number">166.89 M</h3>
-                                <p class="stat-text">Downloads</p>
+                                <i class="lnr lnr-users"> </i>
+                                <?php
+                                $customer_sql = "SELECT COUNT(*) as customer FROM `tbl_customer_account`";
+                                $customer_res = $conn->query($customer_sql);
+                                $customer_row = $customer_res->fetch_assoc();
+                                ?>
+                                <h3 class="text-success number"><?= $customer_row['customer'] ?></h3>
+                                <p class="stat-text">Total Customers</p>
                             </div>
                         </div>
                         <div class="col-sm-6 pl-sm-2 statistics-grid">
                             <div class="card card_border border-primary-top p-4">
                                 <i class="lnr lnr-cart"> </i>
                                 <h3 class="text-danger number">1,250k</h3>
-                                <p class="stat-text">Purchased</p>
+                                <p class="stat-text">Orders</p>
                             </div>
                         </div>
                     </div>

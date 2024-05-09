@@ -5,6 +5,14 @@
   <div class="menu-right">
     <div class="navbar user-panel-top">
       <div class="user-dropdown-details d-flex">
+        <div class="profile_details_left">
+          <ul class="nofitications-dropdown">
+            <li class="dropdown">
+              <a href="order.php" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                  class="fa-solid fa-cart-shopping"></i><span class="badge blue">3</span></a>
+            </li>
+          </ul>
+        </div>
         <div class="profile_details">
           <ul>
             <li class="dropdown profile_details_drop">
@@ -32,14 +40,14 @@
                     $user_row = $user_res->fetch_assoc();
                   }
                   ?>
-                  <h5 class="user-name text-capitalize"><?=$user_row['firstname'] .' '.$user_row['lastname']?></h5>
+                  <h5 class="user-name text-capitalize"><?= $user_row['firstname'] . ' ' . $user_row['lastname'] ?></h5>
                   <span class="status ml-2 text-capitalize"><?= $user_row['login_role'] ?></span>
                 </li>
                 <?php
                 if ($_SESSION['login_role'] != 1) {
                   ?>
                   <li> <a href="../forms/edit-forms/customer.php"><i class="lnr lnr-user"></i>My Profile</a> </li>
-                <?php
+                  <?php
                 }
                 ?>
                 <li class="logout"> <a href="../index.php"><i class="fa fa-power-off"></i> Logout</a> </li>

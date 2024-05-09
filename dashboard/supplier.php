@@ -129,12 +129,18 @@ include '../template/header.php';
 
                                             </div>
                                         </div>
+                                        <?php
+                                        if ($_SESSION['login_role'] == 1) {
+                                            ?>
 
-                                        <!-- delete trigger modal -->
-                                        <button type="button" class="btn btn-danger btn-style mb-3" data-toggle="modal"
-                                            data-target="#delete-sup<?= $row['supplier_id'] ?>">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </button>
+                                            <!-- delete trigger modal -->
+                                            <button type="button" class="btn btn-danger btn-style mb-3" data-toggle="modal"
+                                                data-target="#delete-sup<?= $row['supplier_id'] ?>">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+                                            <?php
+                                        }
+                                        ?>
 
                                         <!-- Delete Modal -->
                                         <div class="modal fade" id="delete-sup<?= $row['supplier_id'] ?>" tabindex="-1"

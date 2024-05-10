@@ -12,7 +12,7 @@ $stock = $conn->real_escape_string($_POST['stock']);
 
 // Check if an image file has been uploaded
 if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
-    $target_directory = "uploads/"; // Directory where uploaded images will be stored
+    $target_directory = "../../assets/images/"; // Directory where uploaded images will be stored
     $target_file = $target_directory . basename($_FILES["image"]["name"]);
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
@@ -35,6 +35,17 @@ if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
 
         // Insert product data into database including the image filename
         $image_name = basename($_FILES["image"]["name"]);
+        $sql = "INSERT INTO `tbl_product`(`supplier_id`, `category_id`, `product_name`, `description`, `price`, `stock`, `expiry_date`,`image`) 
+        VALUES ('$supplier','$category','$product','$description','$price','$stock','$expiry_date','$image_name')";
+        
+        $result = $conn->query($sql);
+        if (!$result) {
+            echo 'Failed to add product' . $conn->error;
+        } else {
+            $_SESSION['confirm_msg'] = "Successfully Added New Product";
+            header('location: ../../dashboard/product.php');
+        }
+
     } else {
         $_SESSION['deleteMsg'] = "File is not an image.";
         header('location: ../../dashboard/product.php');

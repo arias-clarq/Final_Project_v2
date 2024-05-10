@@ -56,7 +56,12 @@ include '../template/header.php';
                         </thead>
                         <tbody>
                             <?php
-                            $sql = "SELECT * FROM `tbl_customer_account` INNER JOIN tbl_login_role ON tbl_customer_account.login_role_id = tbl_login_role.login_role_id";
+                            if (isset($_POST['o_customer_id'])) {
+                                $get_id = $_POST['o_customer_id'];
+                                $sql = "SELECT * FROM `tbl_customer_account` INNER JOIN tbl_login_role ON tbl_customer_account.login_role_id = tbl_login_role.login_role_id WHERE `customer_id` = $get_id";
+                            } else {
+                                $sql = "SELECT * FROM `tbl_customer_account` INNER JOIN tbl_login_role ON tbl_customer_account.login_role_id = tbl_login_role.login_role_id";
+                            }
                             $result = $conn->query($sql);
                             $count = 0;
                             while ($row = $result->fetch_assoc()) {

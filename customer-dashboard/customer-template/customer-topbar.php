@@ -8,8 +8,8 @@
         <div class="profile_details_left">
           <ul class="nofitications-dropdown">
             <li class="dropdown">
-              <a href="order.php" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                  class="fa-solid fa-cart-shopping"></i><span class="badge blue">3</span></a>
+              <a href="order.php" class="dropdown-toggle" aria-expanded="false"><i
+                  class="fa-solid fa-cart-shopping"></i><span class="badge blue"><?=(isset($_SESSION['cart'])) ? count($_SESSION['cart']) : ""?></span></a>
             </li>
           </ul>
         </div>

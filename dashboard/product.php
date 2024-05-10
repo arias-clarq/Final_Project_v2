@@ -68,9 +68,17 @@ include '../template/header.php';
                         </thead>
                         <tbody>
                             <?php
-                            $sql = "SELECT * FROM `tbl_product` 
-                            INNER JOIN tbl_supplier ON tbl_supplier.supplier_id = tbl_product.supplier_id
-                            INNER JOIN tbl_category ON tbl_category.category_id = tbl_product.category_id";
+                            if (isset($_POST['o_product_id'])) {
+                                $get_id = $_POST['o_product_id'];
+                                $sql = "SELECT * FROM `tbl_product` 
+                                INNER JOIN tbl_supplier ON tbl_supplier.supplier_id = tbl_product.supplier_id
+                                INNER JOIN tbl_category ON tbl_category.category_id = tbl_product.category_id WHERE `product_id` = $get_id";
+                            } else {
+                                $sql = "SELECT * FROM `tbl_product` 
+                                INNER JOIN tbl_supplier ON tbl_supplier.supplier_id = tbl_product.supplier_id
+                                INNER JOIN tbl_category ON tbl_category.category_id = tbl_product.category_id";
+                            }
+
                             $result = $conn->query($sql);
                             $count = 0;
                             while ($row = $result->fetch_assoc()) {

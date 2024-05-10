@@ -42,7 +42,7 @@
       }
       ?>
       <li class="menu-list">
-        <a href="#"><i class="fa-solid fa-boxes-stacked"></i>
+        <a href="#"><i class="fa fa-boxes-stacked"></i>
           <span>Inventory Management <i class="lnr lnr-chevron-right"></i></span></a>
         <ul class="sub-menu-list">
           <li><a href="product.php">Product List</a> </li>
@@ -50,7 +50,7 @@
           <li><a href="supplier.php">Supplier List</a> </li>
         </ul>
       </li>
-      <li><a href="forms.html"><i class="fa fa-file-text"></i> <span>Forms</span></a></li>
+      <li><a href="order.php"><i class="fa fa-basket-shopping"></i> <span>Order List</span></a></li>
     </ul>
     <!-- //sidebar nav end -->
     <!-- toggle button start -->

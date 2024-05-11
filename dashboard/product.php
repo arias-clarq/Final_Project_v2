@@ -89,7 +89,7 @@ include '../template/header.php';
                                 <tr>
                                     <td><?= $count ?></td>
                                     <td>
-                                        <div class="row"><img src="../assets/images/<?= $row['image'] ?>" width="100"
+                                        <div class="row"><img src="../assets/images/<?= ($row['image'] != null) ? $row['image'] : 'template.png' ?>" width="100"
                                                 height="100"></div>
                                         <div class="row"><?= $row['product_name'] ?></div>
                                     </td>

@@ -139,3 +139,18 @@ if (isset($_POST['order'])) {
         header('location: ../../dashboard/order.php');
     }
 }
+
+if (isset($_POST['mark'])) {
+    $id = $conn->real_escape_string($_POST['id']);
+    $received = $conn->real_escape_string($_POST['received']);
+
+    $sql = "UPDATE `tbl_order` SET `is_received`='1' WHERE `order_id` = $id";
+    $result = $conn->query($sql);
+
+    if (!$result) {
+        echo 'Failed to proccess' . $conn->error;
+    } else {
+        $_SESSION['confirm_msg'] = "Thank you for your patronage";
+        header('location: ../../customer-dashboard/purchase.php');
+    }
+}

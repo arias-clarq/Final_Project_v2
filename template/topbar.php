@@ -5,6 +5,19 @@
   <div class="menu-right">
     <div class="navbar user-panel-top">
       <div class="user-dropdown-details d-flex">
+        <div class="profile_details_left">
+          <ul class="nofitications-dropdown">
+            <?php
+            $ticket_sql = "SELECT COUNT(*) as ticket FROM `tbl_ticket` WHERE is_resolved = 0";
+            $ticket_res = $conn->query($ticket_sql);
+            $ticket_row = $ticket_res->fetch_assoc();
+            ?>
+            <li class="dropdown">
+              <a href="ticket.php" class="dropdown-toggle" aria-expanded="false"><i
+                  class="fa fa-circle-info fa-xl"></i><span class="badge blue"><?=($ticket_row['ticket'] != 0) ? $ticket_row['ticket'] : ""?></span></a>
+            </li>
+          </ul>
+        </div>
         <div class="profile_details">
           <ul>
             <li class="dropdown profile_details_drop">
@@ -35,11 +48,11 @@
                   <h5 class="user-name text-capitalize"><?= $user_row['lastname'] . ',' . $user_row['firstname'] ?></h5>
                   <span class="status ml-2 text-capitalize"><?= $user_row['login_role'] ?></span>
                 </li>
-                <?php 
-                if($_SESSION['login_role'] != 1){
-                ?>
-                <li> <a href="../forms/edit-forms/employee.php"><i class="lnr lnr-user"></i>My Profile</a> </li>
-                <?php 
+                <?php
+                if ($_SESSION['login_role'] != 1) {
+                  ?>
+                  <li> <a href="../forms/edit-forms/employee.php"><i class="lnr lnr-user"></i>My Profile</a> </li>
+                  <?php
                 }
                 ?>
                 <li class="logout"> <a href="../index.php"><i class="fa fa-power-off"></i> Logout</a> </li>

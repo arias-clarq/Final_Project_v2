@@ -52,13 +52,16 @@ include 'customer-template/customer-header.php'; ?>
                                 INNER JOIN tbl_supplier ON tbl_supplier.supplier_id = tbl_product.supplier_id
                                 INNER JOIN tbl_category ON tbl_category.category_id = tbl_product.category_id";
                                 $result = $conn->query($sql);
+                                $count = 0;
                                 while ($row = $result->fetch_assoc()) {
+                                    $count++;
                                     if ($row['stock'] > 0) {
                                         $status = "btn btn-success";
                                         $msg = "Available";
                                     } else {
                                         $status = "btn btn-danger";
                                         $msg = "Unavailable";
+                                        $disabled[$count] = true;
                                     }
                                     ?>
                                     <div class="col-lg-3 col-md-6 mb-lg-0 mb-4 px-2">
@@ -78,15 +81,28 @@ include 'customer-template/customer-header.php'; ?>
                                                     <p class="card-title text-primary">Price: ₱<?= $row['price'] ?></p>
                                                     <p>Description: <?= $row['description'] ?></p>
                                                     <div class="social">
-                                                        <!-- add trigger modal -->
-                                                        <button type="button" class="btn btn-success btn-style mt-3 mb-3"
-                                                            data-toggle="modal" data-target="#ord-prod<?= $row['product_id'] ?>">
-                                                            <i class="fa fa-cart-shopping" aria-hidden="true"></i> Add To
-                                                            Cart
-                                                        </button>
+
+                                                        <?php if (isset($disabled[$count]) != true) { ?>
+                                                            <!-- add trigger modal -->
+                                                            <button type="button" class="btn btn-success btn-style mt-3 mb-3"
+                                                                data-toggle="modal"
+                                                                data-target="#ord-prod<?= $row['product_id'] ?>">
+                                                                <i class="fa fa-cart-shopping" aria-hidden="true"></i> Add To
+                                                                Cart
+                                                            </button>
+                                                        <?php } else { ?>
+                                                            <!-- add trigger modal -->
+                                                            <button type="button" class="btn btn-success btn-style mt-3 mb-3"
+                                                                data-toggle="modal"
+                                                                data-target="#ord-prod<?= $row['product_id'] ?>" disabled>
+                                                                <i class="fa fa-cart-shopping" aria-hidden="true"></i> Add To
+                                                                Cart
+                                                            </button>
+                                                        <?php } ?>
 
                                                         <!-- Add Modal -->
-                                                        <div class="modal fade" id="ord-prod<?= $row['product_id'] ?>" tabindex="-1" role="dialog"
+                                                        <div class="modal fade" id="ord-prod<?= $row['product_id'] ?>"
+                                                            tabindex="-1" role="dialog"
                                                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                                 <div class="modal-content">
@@ -122,8 +138,8 @@ include 'customer-template/customer-header.php'; ?>
                                                                                     class="input-group-text">Description</span>
                                                                                 <textarea name="description"
                                                                                     class="form-control">
-                                                                                                                <?= $row['description'] ?>
-                                                                                                            </textarea>
+                                                                                                                        <?= $row['description'] ?>
+                                                                                                                    </textarea>
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-footer">

@@ -83,8 +83,44 @@
                         <div class="col-sm-6 pl-sm-2 statistics-grid">
                             <div class="card card_border border-primary-top p-4">
                                 <i class="lnr lnr-cart"> </i>
-                                <h3 class="text-danger number">1,250k</h3>
+                                <?php
+                                $order_sql = "SELECT COUNT(*) as 'order' FROM `tbl_order`";
+                                $order_res = $conn->query($order_sql);
+                                $order_row = $order_res->fetch_assoc();
+                                
+                                ?>
+                                <h3 class="text-danger number"><?= $order_row['order'] ?></h3>
                                 <p class="stat-text">Orders</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6 pr-xl-2">
+                    <div class="row">
+                        <div class="col-sm-6 pr-sm-2 statistics-grid">
+                            <div class="card card_border border-primary-top p-4">
+                                <i class="lnr lnr-calendar-full text-info"> </i>
+                                <?php
+                                $attendance_sql = "SELECT COUNT(*) as attendance FROM `tbl_attendance`";
+                                $attendance_res = $conn->query($attendance_sql);
+                                $attendance_row = $attendance_res->fetch_assoc();
+                                ?>
+                                <h3 class="text-primary number"><?= $attendance_row['attendance'] ?></h3>
+                                <p class="stat-text">Total Attendance</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 pl-sm-2 statistics-grid">
+                            <div class="card card_border border-primary-top p-4">
+                                <i class="lnr lnr-users"> </i>
+                                <?php
+                                $ticket_sql = "SELECT COUNT(*) as ticket FROM `tbl_ticket` WHERE is_resolved = 1";
+                                $ticket_res = $conn->query($ticket_sql);
+                                $ticket_row = $ticket_res->fetch_assoc();
+                                ?>
+                                <h3 class="text-primary number"><?= $ticket_row['ticket'] ?></h3>
+                                <p class="stat-text">Total Ticket Resolved</p>
                             </div>
                         </div>
                     </div>
@@ -93,176 +129,163 @@
         </div>
         <!-- //statistics data -->
 
-        <!-- accordions -->
-        <div class="accordions">
-            <div class="row">
-                <!-- accordion style 1 -->
-                <div class="col-lg-12 mb-4">
-                    <div class="card card_border">
-                        <div class="card-header chart-grid__header">
-                            Bootstrap Accordions
-                        </div>
-                        <div class="card-body">
-                            <div class="accordion" id="accordionExample">
-                                <div class="card">
-                                    <div class="card-header bg-white p-0" id="headingOne">
-                                        <a href="#" class="card__title p-3" data-toggle="collapse"
-                                            data-target="#collapseOne" aria-expanded="true"
-                                            aria-controls="collapseOne">Collapsed accordion heading </a>
-                                    </div>
-
-                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                        data-parent="#accordionExample">
-                                        <div class="card-body para__style">
-                                            Nulla tincidunt quam justo, in tincidunt tortor sollicitudin a. Donec porta
-                                            posuere
-                                            libero sed varius. Phasellus hendrerit commodo sem, at sagittis sapien
-                                            semper quis.
-                                            Etiam vitae facilisis nibh. Maecenas erat nisl, blandit at nunc a, lobortis
-                                            sagittis
-                                            ex. Maecenas pharetra pulvinar tincidunt.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header bg-white p-0" id="headingTwo">
-                                        <a href="#" class="card__title p-3" data-toggle="collapse"
-                                            data-target="#collapseTwo" aria-expanded="false"
-                                            aria-controls="collapseTwo">Click here to collapse accordion</a>
-                                    </div>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                        data-parent="#accordionExample">
-                                        <div class="card-body para__style">
-                                            Nulla tincidunt quam justo, in tincidunt tortor sollicitudin a. Donec porta
-                                            posuere
-                                            libero sed varius. Phasellus hendrerit commodo sem, at sagittis sapien
-                                            semper quis.
-                                            Etiam vitae facilisis nibh. Maecenas erat nisl, blandit at nunc a, lobortis
-                                            sagittis
-                                            ex. Maecenas pharetra pulvinar tincidunt.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header bg-white p-0" id="headingThree">
-                                        <a href="#" class="card__title p-3" data-toggle="collapse"
-                                            data-target="#collapseThree" aria-expanded="false"
-                                            aria-controls="collapseThree">Click here to
-                                            collapse accordion</a>
-                                    </div>
-                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                                        data-parent="#accordionExample">
-                                        <div class="card-body para__style">
-                                            Nulla tincidunt quam justo, in tincidunt tortor sollicitudin a. Donec porta
-                                            posuere
-                                            libero sed varius. Phasellus hendrerit commodo sem, at sagittis sapien
-                                            semper quis.
-                                            Etiam vitae facilisis nibh. Maecenas erat nisl, blandit at nunc a, lobortis
-                                            sagittis
-                                            ex. Maecenas pharetra pulvinar tincidunt.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- //accordion style 1 -->
-            </div>
-        </div>
-        <!-- //accordions -->
-
-        <!-- modals -->
-        <section class="template-cards">
-            <div class="card card_border">
+        <!-- employee -->
+        <section class="forms">
+            <!-- forms 1 -->
+            <div class="card card_border py-2 mb-4">
                 <div class="cards__heading">
-                    <h3>Modals - <span>2 different types of bootstrap modals</span></h3>
+                    <h3>Employee List <span></span></h3>
                 </div>
-                <div class="card-body pb-0">
-                    <div class="row">
-                        <div class="col-lg-6 pr-lg-2 chart-grid">
-                            <div class="card text-center card_border">
-                                <div class="card-header chart-grid__header">
-                                    Demo modal
-                                </div>
-                                <div class="card-body">
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-style" data-toggle="modal"
-                                        data-target="#exampleModal">
-                                        Launch demo
-                                    </button>
+                <div class="card-body">
+                    <!-- action msg here -->
+                    <?php
+                    if (isset($_SESSION['confirm_msg'])) {
+                        ?>
+                        <div class="alert alert-success  alert-dismissible">
+                            <strong>
+                                <?= $_SESSION['confirm_msg'] ?>
+                            </strong>
+                        </div>
+                        <?php
+                    } elseif (isset($_SESSION['deleteMsg'])) { ?>
+                        <div class="alert alert-danger  alert-dismissible">
+                            <strong>
+                                <?= $_SESSION['deleteMsg'] ?>
+                            </strong>
+                        </div>
+                    <?php }
+                    unset($_SESSION['deleteMsg']);
+                    unset($_SESSION['confirm_msg']);
+                    ?>
+                    <table id="employee" class="table table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $admin_id = $_SESSION['login_id'];
+                            $sql = "SELECT * FROM `tbl_employee_account` INNER JOIN tbl_login_role ON tbl_employee_account.login_role_id = tbl_login_role.login_role_id";
+                            $result = $conn->query($sql);
+                            $count = 0;
+                            while ($row = $result->fetch_assoc()) {
+                                $count += 1;
+                                ?>
+                                <tr>
+                                    <th scope="row"><?= $count ?></th>
+                                    <td><?= $row['username'] ?></td>
+                                    <td>********</td>
+                                    <td class="text-capitalize"><?= $row['login_role'] ?></td>
+                                    <td>
+                                        <div class="d-flex">
+                                            <form action="../forms/view-forms/employee.php" method="post" class="me-2">
+                                                <input type="hidden" name="id" value="<?= $row['employee_id'] ?>">
+                                                <button type="submit" class="btn btn-warning"><i class="fa fa-eye"
+                                                        aria-hidden="true"></i> View</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    ...
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger"
-                                                        data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-success">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 chart-grid">
-                            <div class="card text-center card_border">
-                                <div class="card-header chart-grid__header">
-                                    Vertical centered
-                                </div>
-                                <div class="card-body">
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-style" data-toggle="modal"
-                                        data-target="#exampleModalCenter">
-                                        Launch demo
-                                    </button>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    ...
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger"
-                                                        data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-success">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
+            <!-- //forms 1 -->
+
         </section>
-        <!-- //modals -->
+
+        <!-- customer -->
+        <section class="forms">
+            <!-- forms 1 -->
+            <div class="card card_border py-2 mb-4">
+                <div class="cards__heading">
+                    <h3>Customer List <span></span></h3>
+                </div>
+                <div class="card-body">
+                    <!-- action msg here -->
+                    <?php
+                    if (isset($_SESSION['confirm_msg'])) {
+                        ?>
+                        <div class="alert alert-success  alert-dismissible">
+                            <strong>
+                                <?= $_SESSION['confirm_msg'] ?>
+                            </strong>
+                        </div>
+                        <?php
+                    } elseif (isset($_SESSION['deleteMsg'])) { ?>
+                        <div class="alert alert-danger  alert-dismissible">
+                            <strong>
+                                <?= $_SESSION['deleteMsg'] ?>
+                            </strong>
+                        </div>
+                    <?php }
+                    unset($_SESSION['deleteMsg']);
+                    unset($_SESSION['confirm_msg']);
+                    ?>
+                    <table id="customer" class="table table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (isset($_POST['o_customer_id'])) {
+                                $get_id = $_POST['o_customer_id'];
+                                $sql = "SELECT * FROM `tbl_customer_account` INNER JOIN tbl_login_role ON tbl_customer_account.login_role_id = tbl_login_role.login_role_id WHERE `customer_id` = $get_id";
+                            } else {
+                                $sql = "SELECT * FROM `tbl_customer_account` INNER JOIN tbl_login_role ON tbl_customer_account.login_role_id = tbl_login_role.login_role_id";
+                            }
+                            $result = $conn->query($sql);
+                            $count = 0;
+                            while ($row = $result->fetch_assoc()) {
+                                $count += 1;
+                                ?>
+                                <tr>
+                                    <th scope="row"><?= $count ?></th>
+                                    <td><?= $row['username'] ?></td>
+                                    <td>********</td>
+                                    <td>
+                                        <div class="d-flex">
+                                            <form action="../forms/view-forms/customer.php" method="post" class="me-2">
+                                                <input type="hidden" name="id" value="<?= $row['customer_id'] ?>">
+                                                <button type="submit" class="btn btn-warning"><i class="fa fa-eye"
+                                                        aria-hidden="true"></i> View</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <!-- //forms 1 -->
+
+        </section>
 
     </div>
 
     <!-- //content -->
 </div>
 <!-- main content end-->
+
+<script>
+    new DataTable('#employee');
+    new DataTable('#customer');
+</script>

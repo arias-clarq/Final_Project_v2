@@ -26,6 +26,15 @@
     <ul class="nav nav-pills nav-stacked custom-nav">
       <li class="active"><a href="dashboard.php "><i class="fa fa-tachometer"></i><span> Dashboard</span></a>
       </li>
+      <li><a href="purchase.php"><i class="fa fa-bag-shopping"></i><span>Purchase</span></a></li>
+      <li class="menu-list">
+        <a href="#"><i class="fa fa-ticket"></i>
+          <span>Help Support <i class="lnr lnr-chevron-right"></i></span></a>
+        <ul class="sub-menu-list">
+          <li><a href="ticket.php">Report A Problem</a> </li>
+          <li><a href="issue_ticket.php">Issue Tracker</a></li>
+        </ul>
+      </li>
     </ul>
     <!-- //sidebar nav end -->
   </div>

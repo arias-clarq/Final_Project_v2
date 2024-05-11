@@ -78,17 +78,23 @@ include '../template/header.php';
                                                 <button type="submit" class="btn btn-warning"><i class="fa fa-eye"
                                                         aria-hidden="true"></i> View</button>
                                             </form>
-                                            <form action="../forms/edit-forms/customer.php" method="post" class="me-2">
-                                                <input type="hidden" name="id" value="<?= $row['customer_id'] ?>">
-                                                <button type="submit" class="btn btn-info"><i class="fa fa-pencil"
-                                                        aria-hidden="true"></i> Edit</button>
-                                            </form>
-                                            <form action="../forms/delete-forms/customer.php" method="post">
-                                                <input type="hidden" value="<?= $row['username'] ?>" name="username">
-                                                <input type="hidden" value="<?= $row['customer_id'] ?>" name="id">
-                                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
-                                                        aria-hidden="true"></i> Delete</button>
-                                            </form>
+                                            <?php
+                                            if ($_SESSION['login_role'] == 1) {
+                                                ?>
+                                                <form action="../forms/edit-forms/customer.php" method="post" class="me-2">
+                                                    <input type="hidden" name="id" value="<?= $row['customer_id'] ?>">
+                                                    <button type="submit" class="btn btn-info"><i class="fa fa-pencil"
+                                                            aria-hidden="true"></i> Edit</button>
+                                                </form>
+                                                <form action="../forms/delete-forms/customer.php" method="post">
+                                                    <input type="hidden" value="<?= $row['username'] ?>" name="username">
+                                                    <input type="hidden" value="<?= $row['customer_id'] ?>" name="id">
+                                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
+                                                            aria-hidden="true"></i> Delete</button>
+                                                </form>
+                                                <?php
+                                            }
+                                            ?>
                                         </div>
                                     </td>
                                 </tr>

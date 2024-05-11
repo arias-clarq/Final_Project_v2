@@ -26,17 +26,23 @@
     <ul class="nav nav-pills nav-stacked custom-nav">
       <li class="active"><a href="dashboard.php "><i class="fa fa-tachometer"></i><span> Dashboard</span></a>
       </li>
+      <li class="menu-list">
+        <a href="#"><i class="fa fa-users"></i>
+          <span>User Management <i class="lnr lnr-chevron-right"></i></span></a>
+        <ul class="sub-menu-list">
+          <?php
+          if ($_SESSION['login_role'] == 1) {
+            ?>
+            <li><a href="employee_mgt.php">Employee</a> </li>
+            <?php
+          }
+          ?>
+          <li><a href="customer_mgt.php">Customer</a> </li>
+        </ul>
+      </li>
       <?php
       if ($_SESSION['login_role'] == 1) {
         ?>
-        <li class="menu-list">
-          <a href="#"><i class="fa fa-users"></i>
-            <span>User Management <i class="lnr lnr-chevron-right"></i></span></a>
-          <ul class="sub-menu-list">
-            <li><a href="employee_mgt.php">Employee</a> </li>
-            <li><a href="customer_mgt.php">Customer</a> </li>
-          </ul>
-        </li>
         <li><a href="attendance_monitoring.php"><i class="fa fa-table"></i> <span>Attendance Monitoring</span></a></li>
         <?php
       }
@@ -51,6 +57,7 @@
         </ul>
       </li>
       <li><a href="order.php"><i class="fa fa-basket-shopping"></i> <span>Order List</span></a></li>
+      <li><a href="ticket.php"><i class="fa fa-circle-info"></i><span>Help Support</span></a></li>
     </ul>
     <!-- //sidebar nav end -->
     <!-- toggle button start -->

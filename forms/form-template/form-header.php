@@ -20,6 +20,8 @@ if (!$_SESSION['login_session']) {
 
   <!-- google fonts -->
   <link href="//fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css">
 </head>
 
 <body class="sidebar-menu-collapsed">

@@ -39,21 +39,38 @@
         <?php
       }
       ?>
+      <li class="menu-list">
+        <a href="#"><i class="fa fa-users"></i>
+          <span>User Management <i class="lnr lnr-chevron-right"></i></span></a>
+        <ul class="sub-menu-list">
+          <?php
+          if ($_SESSION['login_role'] == 1) {
+            ?>
+            <li><a href="../../dashboard/employee_mgt.php">Employee</a> </li>
+            <?php
+          }
+          ?>
+          <li><a href="../../dashboard/customer_mgt.php">Customer</a> </li>
+        </ul>
+      </li>
       <?php
       if ($_SESSION['login_role'] == 1) {
         ?>
-        <li class="menu-list">
-          <a href="#"><i class="fa fa-users"></i>
-            <span>User Management <i class="lnr lnr-chevron-right"></i></span></a>
-          <ul class="sub-menu-list">
-            <li><a href="../../dashboard/employee_mgt.php">Employee</a> </li>
-            <li><a href="../../dashboard/customer_mgt.php">Customer</a> </li>
-          </ul>
-        </li>
-        <li><a href="../../dashboard/attendance_monitoring.php"><i class="fa fa-table"></i> <span>Attendance Monitoring</span></a></li>
+        <li><a href="../../dashboard/attendance_monitoring.php"><i class="fa fa-table"></i> <span>Attendance
+              Monitoring</span></a></li>
         <?php
       }
       ?>
+      <li class="menu-list">
+        <a href="#"><i class="fa fa-boxes-stacked"></i>
+          <span>Inventory Management <i class="lnr lnr-chevron-right"></i></span></a>
+        <ul class="sub-menu-list">
+          <li><a href="../../dashboard/product.php">Product List</a> </li>
+          <li><a href="../../dashboard/category.php">Category List</a> </li>
+          <li><a href="../../dashboard/supplier.php">Supplier List</a> </li>
+        </ul>
+      </li>
+      <li><a href="../../dashboard/order.php"><i class="fa fa-basket-shopping"></i> <span>Order List</span></a></li>
     </ul>
     <!-- //sidebar nav end -->
   </div>

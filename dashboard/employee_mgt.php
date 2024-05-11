@@ -62,7 +62,14 @@ include '../template/header.php';
                         <tbody>
                             <?php
                             $admin_id = $_SESSION['login_id'];
-                            $sql = "SELECT * FROM `tbl_employee_account` INNER JOIN tbl_login_role ON tbl_employee_account.login_role_id = tbl_login_role.login_role_id WHERE `employee_id` != $admin_id";
+
+                            if (isset($_POST['o_employee_id'])) {
+                                $get_id = $_POST['o_employee_id'];
+                                $sql = "SELECT * FROM `tbl_employee_account` INNER JOIN tbl_login_role ON tbl_employee_account.login_role_id = tbl_login_role.login_role_id WHERE `employee_id` = $get_id";
+                            } else {
+                                $sql = "SELECT * FROM `tbl_employee_account` INNER JOIN tbl_login_role ON tbl_employee_account.login_role_id = tbl_login_role.login_role_id WHERE `employee_id` != $admin_id";
+                            }
+
                             $result = $conn->query($sql);
                             $count = 0;
                             while ($row = $result->fetch_assoc()) {
